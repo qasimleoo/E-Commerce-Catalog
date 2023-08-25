@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class LoginController {
+public class HomeController {
     @Autowired
     private BCryptPasswordEncoder cryptPasswordEncoder;
     @Autowired
@@ -25,9 +25,9 @@ public class LoginController {
     @Autowired
     RoleRepo roleRepo;
 
-    @GetMapping("/login")
+    @GetMapping("/shop")
     public String login(){
-        return "login";
+        return "shop";
     }
 
     @PostMapping("/login")

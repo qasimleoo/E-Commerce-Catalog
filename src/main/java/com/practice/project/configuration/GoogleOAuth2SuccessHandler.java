@@ -4,7 +4,6 @@ import com.practice.project.modal.Role;
 import com.practice.project.modal.User;
 import com.practice.project.repository.RoleRepo;
 import com.practice.project.repository.UserRepo;
-import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,11 +27,10 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
     UserRepo userRepo;
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
         String email = token.getPrincipal().getAttributes().get("email").toString();
         if(userRepo.findUserByEmail(email).isPresent()){
-
         }
         else {
             User user = new User();
@@ -47,10 +45,5 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
             userRepo.save(user);
         }
         redirectStrategy.sendRedirect(request, response, "/");
-    }
-
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-
     }
 }
