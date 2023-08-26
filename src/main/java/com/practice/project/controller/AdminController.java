@@ -6,6 +6,7 @@ import com.practice.project.modal.Product;
 import com.practice.project.service.CategoryService;
 import com.practice.project.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +26,14 @@ public class AdminController {
     CategoryService categoryService;
     @Autowired
     ProductService productService;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/admin")
     public String adminHome(){
         return "adminHome";
     }
+
     // Categories Section
     @GetMapping("/admin/categories")
     public String getCat(Model model){

@@ -23,6 +23,7 @@ public class CategoryService {
         categoryRepo.deleteById(id);
     }
     public Optional<Category> getCategoryById(int id){
+        System.out.println("getCategoryById");
         return categoryRepo.findById(id);
     }
 
