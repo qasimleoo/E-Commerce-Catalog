@@ -23,6 +23,7 @@ public class ProductService {
         productRepo.deleteById(id);
     }
     public Optional<Product> getProductById(Long id){
+        System.out.println("getProductByID");
         return productRepo.findById(id);
     }
     public List<Product> getProductsByCategoryId(int id){

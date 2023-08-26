@@ -30,10 +30,6 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String loginPost(){
-        return "shop";
-    }
 
     @GetMapping("/register")
     public String registerGet(){
