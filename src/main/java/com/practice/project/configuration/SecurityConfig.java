@@ -1,5 +1,6 @@
 package com.practice.project.configuration;
 
+import com.practice.project.modal.CustomUserDetail;
 import com.practice.project.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,7 @@ public class SecurityConfig {
     GoogleOAuth2SuccessHandler googleOAuth2SuccessHandler;
     @Autowired
     CustomUserDetailService customUserDetailService;
+
 
     @Bean
     MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
@@ -44,8 +46,7 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/productImages/**"),
                                 new AntPathRequestMatcher("/js/**")
                         ).permitAll()
-                        .requestMatchers(mvc.pattern("/admin/**")).hasRole("ADMIN")
-                        .requestMatchers(mvc.pattern("/shop/**")).hasRole("USER")
+                        .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -59,8 +60,11 @@ public class SecurityConfig {
                 .oauth2Login(oauth -> oauth
                         .loginPage("/login")
                         .successHandler(googleOAuth2SuccessHandler)
+                        .failureUrl("/login?error=true")
+                        .defaultSuccessUrl("/")
                 )
                 .exceptionHandling(configurer -> configurer
+                        .accessDeniedHandler((request, response, accessDeniedException) -> response.sendRedirect("/access-denied"))
                         .accessDeniedPage("/access-denied")
                 )
                 .logout(logout -> logout

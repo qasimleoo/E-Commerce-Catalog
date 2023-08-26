@@ -1,7 +1,6 @@
 package com.practice.project.controller;
 
-import com.practice.project.repository.RoleRepo;
-import com.practice.project.repository.UserRepo;
+import com.practice.project.global.GlobalData;
 import com.practice.project.service.CategoryService;
 import com.practice.project.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +13,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class HomeController {
     @Autowired
-    UserRepo userRepo;
-    @Autowired
-    RoleRepo roleRepo;
-    @Autowired
     ProductService productService;
     @Autowired
     CategoryService categoryService;
 
+    @GetMapping({"/", "/home"})
+    public String home(Model model){
+        model.addAttribute("cartCount", GlobalData.cart.size());
+        return "index";
+    }
+
     @GetMapping("/shop")
-    public String login(Model model){
+    public String shop(Model model){
         model.addAttribute("categories", categoryService.getAllCategory());
+        model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("cartCount", GlobalData.cart.size());
 
         return "shop";
     }
@@ -32,7 +35,7 @@ public class HomeController {
     @GetMapping("/shop/category/{id}")
     public String shopByCategory(Model model, @PathVariable int id){
         model.addAttribute("categories", categoryService.getAllCategory());
-//        model.addAttribute("cartCount", GlobalData.cart.size());
+        model.addAttribute("cartCount", GlobalData.cart.size());
         model.addAttribute("products", productService.getProductsByCategoryId(id));
         return "shop";
     }
@@ -40,7 +43,13 @@ public class HomeController {
     @GetMapping("/shop/viewproduct/{id}")
     public String viewProduct(Model model, @PathVariable Long id){
         model.addAttribute("product", productService.getProductById(id).get());
-//        model.addAttribute("cartCount", GlobalData.cart.size());
+        model.addAttribute("cartCount", GlobalData.cart.size());
         return "viewProduct";
     }
+
+    @GetMapping("/access-denied")
+    public String accessDenied(){
+        return "access-denied";
+    }
+
 }

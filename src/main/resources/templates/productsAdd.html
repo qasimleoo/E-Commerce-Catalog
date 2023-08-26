@@ -104,6 +104,15 @@
 <script>
     function readURL(input){
         if(input.files && input.files[0]){
+            if (input.files[0].size > 2 * 1024 * 1024) { // Check if size is larger than 2MB
+                alert('Selected image size exceeds 2MB. Please choose a smaller image.');
+                // Clear the file input value
+                $('#productImage').val('');
+                // Reset the label
+                $(".custom-file-label").removeClass("selected").html("Choose file");
+                return;
+            }
+
             var reader = new FileReader();
             reader.onload = function(e){
                 $('#imgPreview').attr('src', e.target.result).width(100).height(100);
@@ -111,13 +120,16 @@
             reader.readAsDataURL(input.files[0])
         }
     }
+
     $('#productImage').change(function(){
         readURL(this);
     });
+
     $(".custom-file-input").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 </script>
+
 </body>
 </html>
