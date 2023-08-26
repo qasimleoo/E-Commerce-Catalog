@@ -14,6 +14,7 @@ public class CategoryService {
     CategoryRepo categoryRepo;
 
     public List<Category> getAllCategory(){
+
         return categoryRepo.findAll();
     }
     public void addCategory(Category category){
@@ -23,7 +24,6 @@ public class CategoryService {
         categoryRepo.deleteById(id);
     }
     public Optional<Category> getCategoryById(int id){
-        System.out.println("getCategoryById");
         return categoryRepo.findById(id);
     }
 
