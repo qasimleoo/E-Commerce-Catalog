@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
@@ -22,26 +23,17 @@ public class SecurityConfig {
     @Autowired
     CustomUserDetailService customUserDetailService;
 
-
     @Bean
-    MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
-        return new MvcRequestMatcher.Builder(introspector).servletPath("/spring-mvc");
-    }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, MvcRequestMatcher.Builder mvc) throws Exception {
-
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(requests -> requests
-
                         .requestMatchers(
                                 new AntPathRequestMatcher("/h2-console/**"),
                                 new AntPathRequestMatcher("/"),
                                 new AntPathRequestMatcher("/shop/**"),
-                                new AntPathRequestMatcher("/register")
-                        ).permitAll()
-                        .requestMatchers(
+                                new AntPathRequestMatcher("/register"),
                                 new AntPathRequestMatcher("/resources/**"),
                                 new AntPathRequestMatcher("/static/**"),
+                                new AntPathRequestMatcher("/css/**"),
                                 new AntPathRequestMatcher("/images/**"),
                                 new AntPathRequestMatcher("/productImages/**"),
                                 new AntPathRequestMatcher("/js/**")
@@ -53,7 +45,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .permitAll()
                         .failureUrl("/login?error=true")
-                        .defaultSuccessUrl("/")
+                        .successHandler(customAuthenticationSuccessHandler()) // Use custom success handler
                         .passwordParameter("password")
                         .usernameParameter("email")
                 )
@@ -61,7 +53,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .successHandler(googleOAuth2SuccessHandler)
                         .failureUrl("/login?error=true")
-                        .defaultSuccessUrl("/")
+                        .successHandler(customAuthenticationSuccessHandler()) // Use custom success handler
                 )
                 .exceptionHandling(configurer -> configurer
                         .accessDeniedHandler((request, response, accessDeniedException) -> response.sendRedirect("/access-denied"))
@@ -78,9 +70,20 @@ public class SecurityConfig {
                 .headers(headers ->
                         headers.disable()
                 );
+
         return httpSecurity.build();
     }
 
+    @Bean
+    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+        return (request, response, authentication) -> {
+            if (authentication.getAuthorities().stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))) {
+                response.sendRedirect("/admin");
+            } else {
+                response.sendRedirect("/");
+            }
+        };
+    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
