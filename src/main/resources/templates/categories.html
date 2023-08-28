@@ -49,14 +49,12 @@
         </tr>
         </thead>
         <tbody>
-
         <tr th:each="category, iStat : ${categories}">
             <th scope="row" th:text="${iStat.index + 1}">1</th>
             <td th:text="${category.name}">Larry</td>
 
             <td><a href="" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a></td>
             <td><a href="" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-warning">Update</a></td>
-
         </tr>
         </tbody>
     </table>
