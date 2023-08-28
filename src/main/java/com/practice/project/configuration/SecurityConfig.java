@@ -32,14 +32,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, MvcRequestMatcher.Builder mvc) throws Exception {
 
         httpSecurity.authorizeHttpRequests(requests -> requests
-
                         .requestMatchers(
                                 new AntPathRequestMatcher("/h2-console/**"),
                                 new AntPathRequestMatcher("/"),
                                 new AntPathRequestMatcher("/shop/**"),
-                                new AntPathRequestMatcher("/register")
-                        ).permitAll()
-                        .requestMatchers(
+                                new AntPathRequestMatcher("/register"),
                                 new AntPathRequestMatcher("/resources/**"),
                                 new AntPathRequestMatcher("/static/**"),
                                 new AntPathRequestMatcher("/images/**"),
@@ -53,7 +50,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .permitAll()
                         .failureUrl("/login?error=true")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/", true)
                         .passwordParameter("password")
                         .usernameParameter("email")
                 )
@@ -61,7 +58,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .successHandler(googleOAuth2SuccessHandler)
                         .failureUrl("/login?error=true")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/", true)
                 )
                 .exceptionHandling(configurer -> configurer
                         .accessDeniedHandler((request, response, accessDeniedException) -> response.sendRedirect("/access-denied"))

@@ -63,7 +63,7 @@ public class AdminController {
             return "categoriesAdd";
         }
         else
-            return "404";
+            return "404Error";
     }
     // Products Section
     @GetMapping("/admin/products")
