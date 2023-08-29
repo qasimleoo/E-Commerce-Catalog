@@ -1595,6 +1595,7 @@ h5.mb-4 {
 }
 .img-fluid{
     width:50%;
+    margin-bottom:10px;
     mix-blend-mode:darken;
 }
 .cart-product-s{
