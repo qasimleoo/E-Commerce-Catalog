@@ -15,8 +15,10 @@ public class CartController  {
     @Autowired
     ProductService productService;
     @GetMapping("/addToCart/{id}")
-    public void addToCart(@PathVariable Long id){
+    public String addToCart(@PathVariable Long id, Model model) {
         GlobalData.cart.add(productService.getProductById(id).get());
+        model.addAttribute("productId", id);
+        return "addedToCart";
     }
 
     @GetMapping("/cart")
