@@ -14,7 +14,6 @@ public class CategoryService {
     CategoryRepo categoryRepo;
 
     public List<Category> getAllCategory(){
-
         return categoryRepo.findAll();
     }
     public void addCategory(Category category){
@@ -26,5 +25,4 @@ public class CategoryService {
     public Optional<Category> getCategoryById(int id){
         return categoryRepo.findById(id);
     }
-
 }

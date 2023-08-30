@@ -26,50 +26,50 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(requests -> requests
-                        .requestMatchers(
-                                new AntPathRequestMatcher("/h2-console/**"),
-                                new AntPathRequestMatcher("/"),
-                                new AntPathRequestMatcher("/shop/**"),
-                                new AntPathRequestMatcher("/register"),
-                                new AntPathRequestMatcher("/resources/**"),
-                                new AntPathRequestMatcher("/static/**"),
-                                new AntPathRequestMatcher("/css/**"),
-                                new AntPathRequestMatcher("/images/**"),
-                                new AntPathRequestMatcher("/productImages/**"),
-                                new AntPathRequestMatcher("/js/**")
-                        ).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                        .failureUrl("/login?error=true")
-                        .successHandler(customAuthenticationSuccessHandler()) // Use custom success handler
-                        .passwordParameter("password")
-                        .usernameParameter("email")
-                )
-                .oauth2Login(oauth -> oauth
-                        .loginPage("/login")
-                        .successHandler(googleOAuth2SuccessHandler)
-                        .failureUrl("/login?error=true")
-                        .successHandler(customAuthenticationSuccessHandler()) // Use custom success handler
-                )
-                .exceptionHandling(configurer -> configurer
-                        .accessDeniedHandler((request, response, accessDeniedException) -> response.sendRedirect("/access-denied"))
-                        .accessDeniedPage("/access-denied")
-                )
-                .logout(logout -> logout
-                        .permitAll()
-                        .logoutSuccessUrl("/login")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                )
-                .csrf(httpSecurityCsrfConfigurer ->
-                        httpSecurityCsrfConfigurer.disable())
-                .headers(headers ->
-                        headers.disable()
-                );
+            .requestMatchers(
+                new AntPathRequestMatcher("/h2-console/**"),
+                new AntPathRequestMatcher("/"),
+                new AntPathRequestMatcher("/shop/**"),
+                new AntPathRequestMatcher("/register"),
+                new AntPathRequestMatcher("/resources/**"),
+                new AntPathRequestMatcher("/static/**"),
+                new AntPathRequestMatcher("/css/**"),
+                new AntPathRequestMatcher("/images/**"),
+                new AntPathRequestMatcher("/productImages/**"),
+                new AntPathRequestMatcher("/js/**")
+            ).permitAll()
+            .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
+            .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .permitAll()
+                .failureUrl("/login?error=true")
+                .successHandler(customAuthenticationSuccessHandler()) // Use custom success handler
+                .passwordParameter("password")
+                .usernameParameter("email")
+            )
+            .oauth2Login(oauth -> oauth
+                .loginPage("/login")
+                .successHandler(googleOAuth2SuccessHandler)
+                .failureUrl("/login?error=true")
+                .successHandler(customAuthenticationSuccessHandler()) // Use custom success handler
+            )
+            .exceptionHandling(configurer -> configurer
+                .accessDeniedHandler((request, response, accessDeniedException) -> response.sendRedirect("/access-denied"))
+                .accessDeniedPage("/access-denied")
+            )
+            .logout(logout -> logout
+                .permitAll()
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+            )
+            .csrf(httpSecurityCsrfConfigurer ->
+                httpSecurityCsrfConfigurer.disable())
+            .headers(headers ->
+                headers.disable()
+            );
 
         return httpSecurity.build();
     }
