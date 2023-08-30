@@ -31,10 +31,18 @@ public class CartController  {
     public String addToCart(@PathVariable Long id, Model model, Principal principal) {
         GlobalData.cart.add(productService.getProductById(id).get());
         model.addAttribute("productId", id);
+
         User user = (User) customUserDetailService.loadUserByUsername(principal.getName());
         Product product = productService.getProductById(id).get();
-        cartService.addToCart(user, product);
+        UserCart userCart = cartService.addToCart(user, product);
+
         return "addedToCart";
+    }
+
+    @GetMapping("/cart/removeItem/{index}")
+    public String removeItem(@PathVariable int index){
+        GlobalData.cart.remove(index);
+        return "redirect:/cart";
     }
 
     @GetMapping("/cart")
@@ -45,11 +53,7 @@ public class CartController  {
         return "cart";
     }
 
-    @GetMapping("/cart/removeItem/{index}")
-    public String removeItem(@PathVariable int index){
-        GlobalData.cart.remove(index);
-        return "redirect:/cart";
-    }
+
 
     @GetMapping("/checkout")
     public String checkout(Model model){

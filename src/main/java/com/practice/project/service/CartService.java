@@ -12,12 +12,19 @@ public class CartService {
     @Autowired
     private UserCartRepo userCartRepository;
 
-    public void addToCart(User user, Product product) {
+    public UserCart addToCart(User user, Product product) {
         UserCart cartItem = new UserCart();
         cartItem.setUser(user);
         cartItem.setProduct(product);
         cartItem.setQuantity(1);
         user.getCartItems().add(cartItem);
         userCartRepository.save(cartItem);
+        System.out.println(cartItem.getId());
+        return cartItem;
+    }
+
+    public void removeById(Long id){
+        userCartRepository.deleteById(id);
+
     }
 }
