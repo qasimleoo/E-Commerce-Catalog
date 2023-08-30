@@ -28,7 +28,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(){
-        GlobalData.cart.clear();
+//        GlobalData.cart.clear();
         return "login";
     }
 

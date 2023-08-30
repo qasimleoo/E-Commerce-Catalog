@@ -213,3 +213,44 @@ INSERT INTO users (id, email, password, firstName, lastName) VALUES
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-08-29 18:54:34 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP [*]COLUMN USER_CART USER_CART"; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL OBJECTS, DOMAIN, TYPE, DATATYPE, AGGREGATE, SYNONYM"; SQL statement:
+DROP COLUMN USER_CART USER_CART [42001-214]
+2023-08-29 18:54:39 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP [*]COLUMN USER_CART"; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL OBJECTS, DOMAIN, TYPE, DATATYPE, AGGREGATE, SYNONYM"; SQL statement:
+DROP COLUMN USER_CART [42001-214]
+2023-08-29 18:55:05 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]USER_CART"; expected "UPDATE, USE"; SQL statement:
+USER_CART [42001-214]
+2023-08-29 18:55:43 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE USER_CART [*]FROM DB"; SQL statement:
+DELETE USER_CART FROM DB [42000-214]
+2023-08-29 18:56:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DB" not found; SQL statement:
+ALTER TABLE DB
+DROP COLUMN USER_CART [42102-214]
+2023-08-29 18:56:21 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DB" not found; SQL statement:
+ALTER TABLE DB
+DROP COLUMN USER_CART [42102-214]
+2023-08-29 18:56:27 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DB" not found; SQL statement:
+ALTER TABLE DB DROP COLUMN USER_CART [42102-214]
+2023-08-29 18:56:27 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DB" not found; SQL statement:
+ALTER TABLE DB DROP COLUMN USER_CART [42102-214]
+2023-08-29 18:56:28 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DB" not found; SQL statement:
+ALTER TABLE DB DROP COLUMN USER_CART [42102-214]
+2023-08-29 18:56:28 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DB" not found; SQL statement:
+ALTER TABLE DB DROP COLUMN USER_CART [42102-214]
+2023-08-29 18:56:39 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "ALTER TABLE USER_CART[*]"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+ALTER TABLE USER_CART [42001-214]
+2023-08-29 18:56:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "ALTER TABLE USER_CART[*]"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+ALTER TABLE USER_CART [42001-214]
+2023-08-29 18:56:57 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "ALTER TABLE USER_CART[*]"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+ALTER TABLE USER_CART [42001-214]

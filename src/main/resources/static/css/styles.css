@@ -1598,16 +1598,19 @@ h5.mb-4 {
     margin-bottom:10px;
     mix-blend-mode:darken;
 }
-.cart-product-s{
-    display:flex;
+.cart-product-s {
+    display: flex;
+    margin: 0 0 20px 35px;
 }
 @media screen and (max-width: 1100px){
     .cart-product-1{
         margin-right:-150px;
     }
 }
-.cart-product-2{
-
+.cart-product-1 {
+    margin-right: 54px;
+    width: 300px;
+    text-align: center;
 }
 @media screen and (max-width: 950px){
     .cart-col-1{

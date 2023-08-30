@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,6 +32,17 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")}
     )
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserCart> cartItems = new ArrayList<>();
+
+    public List<UserCart> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<UserCart> cartItems) {
+        this.cartItems = cartItems;
+    }
 
     public User() {
     }
