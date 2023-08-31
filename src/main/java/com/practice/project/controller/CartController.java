@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class CartController  {
+public class CartController{
     @Autowired
     ProductService productService;
     @Autowired
@@ -46,7 +46,6 @@ public class CartController  {
             if (userCartId != null) {
                 cartService.removeById(userCartId);
             }
-            System.out.println(userCartId);
             GlobalData.cart.remove(index);
         }
         return "redirect:/cart";
