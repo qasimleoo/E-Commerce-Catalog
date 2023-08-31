@@ -1612,7 +1612,7 @@ h5.mb-4 {
     width: 300px;
     text-align: center;
 }
-@media screen and (max-width: 950px){
+@media screen and (max-width: 960px){
     .cart-col-1{
         width:96%;
         margin-left:5%;
