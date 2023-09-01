@@ -1647,3 +1647,12 @@ h5.mb-4 {
         margin-left: 35px;
     }
 }
+.logout_alert{
+    color: #d10000 !important;
+}
+.logout_alert:hover{
+    color: red !important;
+}
+.nav-list a:hover {
+    font-size: 1.75rem !important;
+}

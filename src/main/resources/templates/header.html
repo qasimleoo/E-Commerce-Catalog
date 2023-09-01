@@ -17,7 +17,7 @@
         <hr>
         <a class="" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">Login</a>
         <hr>
-        <a class="" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
+        <a class="logout_alert" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
         <hr>
         <a th:href="@{/cart}" class="cart-nav">
           Cart <span class="cart-counter" th:text="${cartCount}">0</span>

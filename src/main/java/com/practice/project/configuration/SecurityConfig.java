@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .loginPage("/login")
                 .permitAll()
                 .failureUrl("/login?error=true")
-                .successHandler(customAuthenticationSuccessHandler()) // Use custom success handler
+                .successHandler(customAuthenticationSuccessHandler())
                 .passwordParameter("password")
                 .usernameParameter("email")
             )
@@ -53,7 +53,7 @@ public class SecurityConfig {
                 .loginPage("/login")
                 .successHandler(googleOAuth2SuccessHandler)
                 .failureUrl("/login?error=true")
-                .successHandler(customAuthenticationSuccessHandler()) // Use custom success handler
+                .successHandler(customAuthenticationSuccessHandler())
             )
             .exceptionHandling(configurer -> configurer
                 .accessDeniedHandler((request, response, accessDeniedException) -> response.sendRedirect("/access-denied"))

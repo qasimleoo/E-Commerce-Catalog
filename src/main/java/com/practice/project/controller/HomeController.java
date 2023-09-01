@@ -35,7 +35,8 @@ public class HomeController {
     }
 
     @GetMapping("/payNow")
-    public String payNow(){
+    public String payNow(Model model){
+        model.addAttribute("cartCount", GlobalData.cart.size());
         return "orderPlaced";
     }
 
