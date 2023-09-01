@@ -1,4 +1,4 @@
-package com.practice.project.modal;
+package com.practice.project.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

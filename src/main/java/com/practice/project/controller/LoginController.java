@@ -1,10 +1,9 @@
 package com.practice.project.controller;
 
-import com.practice.project.global.GlobalData;
-import com.practice.project.modal.Role;
-import com.practice.project.modal.User;
-import com.practice.project.repository.RoleRepo;
-import com.practice.project.repository.UserRepo;
+import com.practice.project.entity.Role;
+import com.practice.project.entity.User;
+import com.practice.project.dao.RoleRepo;
+import com.practice.project.dao.UserRepo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.practice.project.modal;
+package com.practice.project.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

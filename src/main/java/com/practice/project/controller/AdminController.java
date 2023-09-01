@@ -1,8 +1,8 @@
 package com.practice.project.controller;
 
 import com.practice.project.dto.ProductDTO;
-import com.practice.project.modal.Category;
-import com.practice.project.modal.Product;
+import com.practice.project.entity.Category;
+import com.practice.project.entity.Product;
 import com.practice.project.service.CategoryService;
 import com.practice.project.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +22,15 @@ import java.util.Optional;
 public class AdminController {
 
     public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/productImages";
-    @Autowired
-    CategoryService categoryService;
-    @Autowired
-    ProductService productService;
+    private CategoryService categoryService;
+    private ProductService productService;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public AdminController(CategoryService theCategoryService, ProductService theProductService) {
+        categoryService = theCategoryService;
+        productService = theProductService;
+    }
 
     @GetMapping("/admin")
     public String adminHome(){
