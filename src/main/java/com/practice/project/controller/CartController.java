@@ -1,10 +1,9 @@
 package com.practice.project.controller;
 
 import com.practice.project.global.GlobalData;
-import com.practice.project.modal.Product;
-import com.practice.project.modal.User;
-import com.practice.project.modal.UserCart;
-import com.practice.project.repository.UserRepo;
+import com.practice.project.entity.Product;
+import com.practice.project.entity.User;
+import com.practice.project.entity.UserCart;
 import com.practice.project.service.CartService;
 import com.practice.project.service.CustomUserDetailService;
 import com.practice.project.service.ProductService;
@@ -13,20 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class CartController{
-    @Autowired
-    ProductService productService;
-    @Autowired
-    CustomUserDetailService customUserDetailService;
-    @Autowired
-    CartService cartService;
+    private CustomUserDetailService customUserDetailService;
+    private ProductService productService;
+    private CartService cartService;
+
+    public CartController(CartService theCartService, CustomUserDetailService theCustomUserDetailService, ProductService theProductService) {
+        cartService = theCartService;
+        customUserDetailService = theCustomUserDetailService;
+        productService = theProductService;
+    }
 
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable Long id, Model model, Principal principal) {

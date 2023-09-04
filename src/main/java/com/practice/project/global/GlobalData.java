@@ -1,6 +1,6 @@
 package com.practice.project.global;
 
-import com.practice.project.modal.Product;
+import com.practice.project.entity.Product;
 
 import java.util.ArrayList;
 import java.util.List;

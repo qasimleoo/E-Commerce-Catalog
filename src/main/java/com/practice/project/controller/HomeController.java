@@ -8,15 +8,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
 public class HomeController {
-    @Autowired
-    ProductService productService;
-    @Autowired
-    CategoryService categoryService;
+    private ProductService productService;
+
+    private CategoryService categoryService;
+
+    public HomeController(CategoryService theCategoryService, ProductService theProductService) {
+        categoryService = theCategoryService;
+        productService = theProductService;
+    }
 
     @GetMapping({"/", "/home"})
     public String home(Model model){

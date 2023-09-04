@@ -1,6 +1,6 @@
-package com.practice.project.repository;
+package com.practice.project.dao;
 
-import com.practice.project.modal.User;
+import com.practice.project.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
