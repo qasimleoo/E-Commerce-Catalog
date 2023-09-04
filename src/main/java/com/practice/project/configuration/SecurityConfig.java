@@ -26,7 +26,7 @@ public class SecurityConfig {
 
     @Bean
     MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
-        return new MvcRequestMatcher.Builder(introspector).servletPath("/web-services");
+        return new MvcRequestMatcher.Builder(introspector).servletPath("/e-catalog");
     }
 
     @Bean

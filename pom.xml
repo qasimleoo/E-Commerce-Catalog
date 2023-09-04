@@ -81,7 +81,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>E-Commerce Catalog</finalName>
+		<finalName>e-catalog</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
