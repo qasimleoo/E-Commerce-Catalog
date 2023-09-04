@@ -12,7 +12,6 @@
 	<artifactId>project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-
 	<name>E-Commerce</name>
 	<description>Project for Spring Boot Practice</description>
 	<properties>
@@ -87,7 +86,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>3.1.2</version>
 				<configuration>
 					<excludes>
 						<exclude>
@@ -95,9 +93,8 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-				</configuration>
+			</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

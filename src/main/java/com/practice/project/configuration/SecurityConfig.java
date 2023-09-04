@@ -10,7 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
 @EnableWebSecurity
@@ -23,21 +25,26 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
+        return new MvcRequestMatcher.Builder(introspector).servletPath("/web-services");
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, MvcRequestMatcher.Builder mvcBuilder) throws Exception {
         httpSecurity.authorizeHttpRequests(requests -> requests
             .requestMatchers(
-                new AntPathRequestMatcher("/h2-console/**"),
-                new AntPathRequestMatcher("/"),
-                new AntPathRequestMatcher("/shop/**"),
-                new AntPathRequestMatcher("/register"),
-                new AntPathRequestMatcher("/resources/**"),
-                new AntPathRequestMatcher("/static/**"),
-                new AntPathRequestMatcher("/css/**"),
-                new AntPathRequestMatcher("/images/**"),
-                new AntPathRequestMatcher("/productImages/**"),
-                new AntPathRequestMatcher("/js/**")
+                mvcBuilder.pattern("/h2-console/**"),
+                mvcBuilder.pattern("/"),
+                mvcBuilder.pattern("/shop/**"),
+                mvcBuilder.pattern("/register"),
+                mvcBuilder.pattern("/resources/**"),
+                mvcBuilder.pattern("/static/**"),
+                mvcBuilder.pattern("/css/**"),
+                mvcBuilder.pattern("/images/**"),
+                mvcBuilder.pattern("/productImages/**"),
+                mvcBuilder.pattern("/js/**")
             ).permitAll()
-            .requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
+            .requestMatchers(mvcBuilder.pattern("/admin/**")).hasRole("ADMIN")
             .anyRequest().authenticated()
             )
             .formLogin(form -> form
